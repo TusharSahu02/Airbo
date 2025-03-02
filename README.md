@@ -1,4 +1,4 @@
 
 # Airbo - chat app 
 
-- can with multi model in a single place
+- can chat with multi model in a single place
