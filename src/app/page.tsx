@@ -1,101 +1,230 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { ModeToggle } from "@/components/ModeToggle";
+import { AppSidebar } from "@/components/app-sidebar";
+
+import React, { useRef, useEffect } from "react";
+import { PiOpenAiLogoThin } from "react-icons/pi";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import {
+  Heading1Icon,
+  Heading2Icon,
+  MinusIcon,
+  PlusIcon,
+  TextQuoteIcon,
+  TypeIcon,
+} from "lucide-react";
+import Link from "next/link";
+export default function HomePage() {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const textarea = textareaRef.current;
+
+    // Adding a null check
+    if (!textarea) return;
+
+    const adjustHeight = () => {
+      textarea.style.height = "auto";
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 100)}px`;
+    };
+
+    textarea.addEventListener("input", adjustHeight);
+    adjustHeight(); // Initial adjustment
+
+    return () => {
+      textarea.removeEventListener("input", adjustHeight);
+    };
+  }, []);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "19rem",
+        } as React.CSSProperties
+      }
+      className="h-screen"
+    >
+      <AppSidebar />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* TODO : hide when side bar is enabled */}
+      <SidebarTrigger className="-ml-1" />
+
+      {/* Center Content div */}
+      <div className="lg:max-w-5xl w-full h-full relative  mx-auto flex items-center justify-center">
+        {/* Search component before prompt */}
+        {/* LOGO  */}
+        <div className=" absolute border size-20 bg-gray-500/50 border-white rounded-full top-40 left-1/2 -translate-x-1/2 "></div>
+        <div className="border max-w-3xl w-[65%] mx-auto bg-[#3e3e3e] rounded-2xl flex flex-col items-end justify-between p-3">
+          <div className=" w-full">
+            {/* Input Text field or Text area */}
+            <textarea
+              ref={textareaRef}
+              className="w-full outline-none overflow-y-auto resize-none hideScrollbar"
+              rows={1}
+              placeholder="Ask anything"
+            ></textarea>
+          </div>
+          <div className="flex items-center w-full justify-between mt-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="rounded-full shadow-none border border-gray-500 cursor-pointer hover:bg-transparent"
+                  aria-label="Open edit menu"
+                >
+                  <PlusIcon size={16} aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="pb-2">
+                <DropdownMenuLabel>Add block</DropdownMenuLabel>
+                <DropdownMenuItem>
+                  <div
+                    className="bg-background flex size-8 items-center justify-center rounded-md border"
+                    aria-hidden="true"
+                  >
+                    <TypeIcon size={16} className="opacity-60" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Text</div>
+                    <div className="text-muted-foreground text-xs">
+                      Start writing with plain text
+                    </div>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <div
+                    className="bg-background flex size-8 items-center justify-center rounded-md border"
+                    aria-hidden="true"
+                  >
+                    <TextQuoteIcon size={16} className="opacity-60" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Quote</div>
+                    <div className="text-muted-foreground text-xs">
+                      Capture a quote
+                    </div>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <div
+                    className="bg-background flex size-8 items-center justify-center rounded-md border"
+                    aria-hidden="true"
+                  >
+                    <MinusIcon size={16} className="opacity-60" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Divider</div>
+                    <div className="text-muted-foreground text-xs">
+                      Visually divide blocks
+                    </div>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <div
+                    className="bg-background flex size-8 items-center justify-center rounded-md border"
+                    aria-hidden="true"
+                  >
+                    <Heading1Icon size={16} className="opacity-60" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Heading 1</div>
+                    <div className="text-muted-foreground text-xs">
+                      Big section heading
+                    </div>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <div
+                    className="bg-background flex size-8 items-center justify-center rounded-md border"
+                    aria-hidden="true"
+                  >
+                    <Heading2Icon size={16} className="opacity-60" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Heading 2</div>
+                    <div className="text-muted-foreground text-xs">
+                      Medium section subheading
+                    </div>
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                {/* Model Selection */}
+                <div className="flex items-center gap-0.5 cursor-pointer">
+                  <PiOpenAiLogoThin size={2} />
+                  <p className=" text-sm">name of model</p>
+                  <ChevronDown size={15} />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Billing</DropdownMenuItem>
+                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>Subscription</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className=" absolute bottom-3 left-1/2 -translate-x-1/2">
+          <p className=" text-sm text-gray-400">
+            can make mistakes. Check important information
+          </p>
+        </div>
+      </div>
+
+      {/* Theme Toggle Button */}
+      <div className=" absolute top-3 right-5 flex gap-2">
+        {/* Upgrade Plan */}
+
+        <Link href="/pricing">
+          <span className="flex items-center justify-center rounded-md px-4 h-full border">
+            <p className=" text-sm">Upgrade Plan</p>
+          </span>
+        </Link>
+
+        {/* Theme toggle */}
+        <ModeToggle />
+
+        {/* Profile */}
+
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <div className=" size-[35px] border rounded-full">
+              <img
+                src="https://api.dicebear.com/9.x/initials/svg?seed=Jude"
+                alt=""
+                className="w-full h-full rounded-full"
+              />
+            </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="mr-4">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
+            <DropdownMenuItem>Team</DropdownMenuItem>
+            <DropdownMenuItem>Subscription</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </SidebarProvider>
   );
 }
