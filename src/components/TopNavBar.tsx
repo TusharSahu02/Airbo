@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Image from "next/image";
 
 const TopNavBar = () => {
   return (
@@ -29,7 +30,10 @@ const TopNavBar = () => {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className=" size-[35px] border rounded-full">
-            <img
+            <Image
+              // TODO : change height
+              height={35}
+              width={35}
               src="https://api.dicebear.com/9.x/initials/svg?seed=Jude"
               alt=""
               className="w-full h-full rounded-full"

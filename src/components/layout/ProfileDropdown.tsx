@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +13,10 @@ export const ProfileDropdown: React.FC = () => {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <div className="size-[35px] border rounded-full">
-          <img
+          <Image
+            // TODO : change height
+            height={35}
+            width={35}
             src="https://api.dicebear.com/9.x/initials/svg?seed=Jude"
             alt=""
             className="w-full h-full rounded-full"
