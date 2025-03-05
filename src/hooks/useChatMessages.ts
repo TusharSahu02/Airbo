@@ -24,6 +24,7 @@ export const useChatMessages = () => {
         const response = await sendChatMessage(message);
         addSystemMessage(response);
       } catch (error) {
+        console.log(`Error while sending message: ${error}`);
         addSystemMessage("An error occurred while sending the message.");
       }
     }

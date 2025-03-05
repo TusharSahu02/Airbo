@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles, Zap, ArrowDownToDot } from "lucide-react";
+import { Zap, ArrowDownToDot } from "lucide-react";
 import { PricingSection } from "@/components/blocks/pricing-section";
 
 const defaultTiers = [
