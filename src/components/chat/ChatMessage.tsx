@@ -18,33 +18,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         isUserMessage ? "bg-blue-500 self-end" : "bg-gray-700 self-start"
       }`}
     >
-      {isUserMessage ? (
-        message.text
-      ) : (
-        <ReactMarkdown
-          children={message.text}
-          remarkPlugins={[remarkGfm]}
-          components={{
-            code({ inline, className, children, ...props }) {
-              const match = /language-(\w+)/.exec(className || "");
-              return !inline && match ? (
-                <SyntaxHighlighter
-                  style={oneDark}
-                  language={match[1]}
-                  PreTag="div"
-                  {...props}
-                >
-                  {String(children).replace(/\n$/, "")}
-                </SyntaxHighlighter>
-              ) : (
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              );
-            },
-          }}
-        />
-      )}
+      {isUserMessage ? message.text : <ReactMarkdown children={message.text} />}
     </div>
   );
 };

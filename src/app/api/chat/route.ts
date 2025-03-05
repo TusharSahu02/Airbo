@@ -23,7 +23,6 @@ export async function POST(req: Request): Promise<Response> {
     const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
     console.log("api key ->", apiKey);
-
     // Make the API request to Azure OpenAI
     const response: AxiosResponse = await axios.post(
       azureEndpoint,
