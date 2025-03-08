@@ -17,7 +17,7 @@ const TopNavBar = () => {
       {/* Upgrade Plan */}
 
       <Link href="/pricing">
-        <span className="flex items-center justify-center rounded-md px-4 h-full border">
+        <span className="items-center justify-cente hidden md:flex rounded-md px-4 h-full border">
           <p className=" text-sm">Upgrade Plan</p>
         </span>
       </Link>
@@ -30,10 +30,7 @@ const TopNavBar = () => {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className=" size-[35px] border rounded-full">
-            <Image
-              // TODO : change height
-              height={35}
-              width={35}
+            <img
               src="https://api.dicebear.com/9.x/initials/svg?seed=Jude"
               alt=""
               className="w-full h-full rounded-full"

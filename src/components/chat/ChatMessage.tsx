@@ -11,8 +11,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
 
   return (
     <div
-      className={`p-3 text-white rounded-lg w-fit max-w-[75%] whitespace-pre-wrap ${
-        isUserMessage ? "bg-blue-500 self-end" : "bg-gray-700 self-start"
+      className={`p-3 text-white rounded-lg w-fit  whitespace-pre-wrap ${
+        isUserMessage ? "bg-blue-500 self-end max-w-[75%]" : "w-full self-start"
       }`}
     >
       {isUserMessage ? (

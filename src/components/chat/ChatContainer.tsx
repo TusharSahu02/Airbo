@@ -4,12 +4,14 @@ import { useChatMessages } from "@/hooks/useChatMessages";
 import { useTextareaAutoResize } from "@/hooks/useTextareaAutoResize";
 import { BlockTypeDropdown } from "../ui/dropdowns/BlockTypeDropdown";
 import { ModelSelector } from "../ui/dropdowns/ModelSelector";
+import useChatStore from "@/stores/chatStore";
 
 export const ChatContainer: React.FC = () => {
   const { chatMessages, message, setMessage, handleSendMessage } =
     useChatMessages();
   const textareaRef = useTextareaAutoResize();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { messages } = useChatStore();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -32,7 +34,7 @@ export const ChatContainer: React.FC = () => {
         <div className="lg:max-w-5xl w-full h-full relative  mx-auto flex items-center justify-center flex-col">
           {/* LOGO  */}
           <div className=" absolute border size-20 bg-gray-500/50 border-white rounded-full top-40 left-1/2 -translate-x-1/2 "></div>
-          <div className="border max-w-3xl w-[65%] mx-auto bg-[#3e3e3e] rounded-2xl flex flex-col items-end justify-between p-3">
+          <div className="border max-w-3xl lg:w-[65%] w-[90%] mx-auto bg-[#3e3e3e] rounded-2xl flex flex-col items-end justify-between p-3">
             <div className=" w-full">
               {/* Input Text field or Text area */}
               <textarea
@@ -51,8 +53,9 @@ export const ChatContainer: React.FC = () => {
             </div>
           </div>
           <div className=" absolute bottom-3 left-1/2 -translate-x-1/2">
-            <p className=" text-sm text-gray-400">
-              can make mistakes. Check important information
+            <p className=" text-sm text-gray-400 text-center">
+              can make mistakes. <br className=" lg:hidden" /> Check important
+              information
             </p>
           </div>
         </div>
@@ -60,14 +63,14 @@ export const ChatContainer: React.FC = () => {
         <div className="lg:max-w-5xl w-full h-full relative gap-4 mx-auto flex flex-col py-2">
           <div className="border size-20 bg-gray-500/50 border-white rounded-full mx-auto"></div>
 
-          <div className="2xl:h-[90%]  md:h-[65%] max-w-3xl w-[65%] relative mx-auto overflow-y-scroll space-y-4 hideScrollbar flex flex-col">
-            {chatMessages.map((msg, index) => (
+          <div className="2xl:h-[90%]  mdh-[65%] h-[80%] max-w-3xl lg:w-[65%] w-[90%] relative mx-auto overflow-y-scroll space-y-4 hideScrollbar flex flex-col">
+            {messages.map((msg, index) => (
               <ChatMessage key={index} message={msg} />
             ))}
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="border max-w-3xl w-[65%] mx-auto bg-[#3e3e3e] rounded-2xl flex flex-col items-end justify-between p-3">
+          <div className="border max-w-3xl lg:w-[65%] w-[90%] mx-auto bg-[#3e3e3e] rounded-2xl flex flex-col items-end justify-between p-3">
             <div className="w-full">
               <textarea
                 ref={textareaRef}

@@ -14,10 +14,10 @@ const ChatLayout = ({ children }: { children: React.ReactNode }) => {
       }
       className="h-screen"
     >
-      <AppSidebar />
-      <SidebarTrigger className="-ml-1" />
-      {children}
       <TopNavBar />
+      <AppSidebar />
+      <SidebarTrigger className="-ml-1 mt-7 absolute" />
+      {children}
     </SidebarProvider>
   );
 };
