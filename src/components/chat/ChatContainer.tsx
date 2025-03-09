@@ -11,6 +11,7 @@ export const ChatContainer: React.FC = () => {
     useChatMessages();
   const textareaRef = useTextareaAutoResize();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const { messages } = useChatStore();
 
   useEffect(() => {
@@ -27,6 +28,20 @@ export const ChatContainer: React.FC = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (messagesContainerRef.current) {
+        messagesContainerRef.current.scrollTop = window.scrollY;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
@@ -63,7 +78,10 @@ export const ChatContainer: React.FC = () => {
         <div className="lg:max-w-5xl w-full h-full relative gap-4 mx-auto flex flex-col py-2">
           <div className="border size-20 bg-gray-500/50 border-white rounded-full mx-auto"></div>
 
-          <div className="2xl:h-[90%]  mdh-[65%] h-[80%] max-w-3xl lg:w-[65%] w-[90%] relative mx-auto overflow-y-scroll space-y-4 hideScrollbar flex flex-col">
+          <div
+            ref={messagesContainerRef}
+            className="2xl:h-[90%]  mdh-[65%] h-[80%] max-w-3xl lg:w-[65%] w-[90%] relative mx-auto overflow-y-scroll space-y-4 hideScrollbar flex flex-col"
+          >
             {messages.map((msg, index) => (
               <ChatMessage key={index} message={msg} />
             ))}

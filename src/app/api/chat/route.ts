@@ -28,7 +28,6 @@ export async function POST(req: Request): Promise<Response> {
       azureEndpoint,
       {
         messages: messages,
-        max_tokens: 500,
       },
       {
         headers: {
