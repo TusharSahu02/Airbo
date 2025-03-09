@@ -39,15 +39,15 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
             {copied ? (
               <CheckCheck
                 size={16}
-                className="text-green-500 mt-5 cursor-pointer"
+                className="text-green-500 mt-2 cursor-pointer"
               />
             ) : (
               <Copy
                 size={16}
-                className="text-gray-500 mt-5 cursor-pointer hover:text-gray-300"
+                className="text-gray-500 mt-2 cursor-pointer hover:text-gray-300"
               />
             )}
-            <span className="text-sm text-gray-500 mt-5 cursor-pointer">
+            <span className="text-sm text-gray-500 mt-2 cursor-pointer">
               {copied ? "Copied!" : "Copy response"}
             </span>
           </button>

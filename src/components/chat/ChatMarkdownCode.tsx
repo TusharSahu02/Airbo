@@ -73,19 +73,19 @@ const ChatMarkdownCode = ({ children }: { children: string }) => {
           );
         },
         h3: ({ children }) => (
-          <h3 className="text-xl font-bold mt-4 mb-2">{children}</h3>
+          <h3 className="text-xl font-bold mt-4 ">{children}</h3>
         ),
         h4: ({ children }) => (
-          <h4 className="text-lg font-bold mt-3 mb-2">{children}</h4>
+          <h4 className="text-lg font-bold mt-3 ">{children}</h4>
         ),
-        p: ({ children }) => <p className="mb-3">{children}</p>,
+        p: ({ children }) => <p className="">{children}</p>,
         ul: ({ children }) => (
-          <ul className="list-disc pl-6 mb-3">{children}</ul>
+          <ul className="list-disc pl-6 ">{children}</ul>
         ),
         ol: ({ children }) => (
-          <ol className="list-decimal pl-6 mb-3">{children}</ol>
+          <ol className="list-decimal pl-6 ">{children}</ol>
         ),
-        li: ({ children }) => <li className="mb-1">{children}</li>,
+        li: ({ children }) => <li className="">{children}</li>,
       }}
     >
       {children}
