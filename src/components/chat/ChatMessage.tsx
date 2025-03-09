@@ -12,23 +12,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const isUserMessage = message.role === "user";
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
-  const isMarkdown = (text: string): boolean => {
-    // Check for common markdown patterns
-    const markdownPatterns = [
-      /^#+\s+.+/m, // Headers
-      /\[.+\]\(.+\)/m, // Links
-      /\*\*.+\*\*/m, // Bold
-      /\*.+\*/m, // Italic
-      /```[\s\S]*```/m, // Code blocks
-      /^\s*[-*+]\s+.+/m, // Unordered lists
-      /^\s*\d+\.\s+.+/m, // Ordered lists
-      /^\s*>\s+.+/m, // Blockquotes
-      /\|.+\|.+\|/m, // Tables
-    ];
-
-    return markdownPatterns.some((pattern) => pattern.test(text));
-  };
-
+  
   // Track code block indices to manage which one was copied
   let codeBlockIndex = -1;
 
@@ -51,7 +35,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       ) : (
         <ReactMarkdown
           components={{
-            code({ node, inline, className, children, ...props }) {
+            code({  inline, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || "");
               const codeContent = String(children).replace(/\n$/, "");
 
