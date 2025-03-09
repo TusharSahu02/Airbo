@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { ChatMessage as ChatMessageType } from "@/types/chat";
 import ChatMarkdownCode from "./ChatMarkdownCode";
+import { CheckCheck, Copy } from "lucide-react";
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -8,6 +9,20 @@ interface ChatMessageProps {
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const isUserMessage = message.role === "user";
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(message.text);
+      setCopied(true);
+      // Reset the copied state after 2 seconds
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
 
   return (
     <div
@@ -18,7 +33,25 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       {isUserMessage ? (
         message.text
       ) : (
-        <ChatMarkdownCode>{message.text}</ChatMarkdownCode>
+        <>
+          <ChatMarkdownCode>{message.text}</ChatMarkdownCode>
+          <button onClick={handleCopy} className="flex items-center gap-2 cursor-pointer">
+            {copied ? (
+              <CheckCheck
+                size={16}
+                className="text-green-500 mt-5 cursor-pointer"
+              />
+            ) : (
+              <Copy
+                size={16}
+                className="text-gray-500 mt-5 cursor-pointer hover:text-gray-300"
+              />
+            )}
+            <span className="text-sm text-gray-500 mt-5 cursor-pointer">
+              {copied ? "Copied!" : "Copy response"}
+            </span>
+          </button>
+        </>
       )}
     </div>
   );
