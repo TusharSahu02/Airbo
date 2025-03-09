@@ -1,18 +1,18 @@
 // src/lib/api/chatApi.ts
 import { ApiRequestMessage } from "@/types/chat";
 
-export const sendChatMessage = async (message: string) => {
+export const sendChatMessage = async (messages:  ApiRequestMessage[]) => {
   try {
-    const messages: ApiRequestMessage[] = [
-      {
-        role: "system",
-        content: "",
-      },
-      {
-        role: "user",
-        content: message,
-      },
-    ];
+    // const messages: ApiRequestMessage[] = [
+    //   {
+    //     role: "system",
+    //     content: "",
+    //   },
+    //   {
+    //     role: "user",
+    //     content: message,
+    //   },
+    // ];
 
     const res = await fetch("/api/chat", {
       method: "POST",

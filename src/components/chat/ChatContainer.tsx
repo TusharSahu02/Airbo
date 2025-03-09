@@ -5,6 +5,7 @@ import { useTextareaAutoResize } from "@/hooks/useTextareaAutoResize";
 import { BlockTypeDropdown } from "../ui/dropdowns/BlockTypeDropdown";
 import { ModelSelector } from "../ui/dropdowns/ModelSelector";
 import useChatStore from "@/stores/chatStore";
+import ChatLoader from "./ChatLoader";
 
 export const ChatContainer: React.FC = () => {
   const { chatMessages, message, setMessage, handleSendMessage } =
@@ -12,7 +13,7 @@ export const ChatContainer: React.FC = () => {
   const textareaRef = useTextareaAutoResize();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const { messages } = useChatStore();
+  const { messages, isLoading } = useChatStore();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -85,6 +86,9 @@ export const ChatContainer: React.FC = () => {
             {messages.map((msg, index) => (
               <ChatMessage key={index} message={msg} />
             ))}
+            {isLoading && (
+              <ChatLoader />
+            )}
             <div ref={messagesEndRef} />
           </div>
 
