@@ -19,7 +19,7 @@ import {
 const data = {
   navMain: [
     {
-      title: "Getting Started",
+      title: "Today",
       url: "#",
       items: [
         {
@@ -33,7 +33,7 @@ const data = {
       ],
     },
     {
-      title: "Building Your Application",
+      title: "Yesterday",
       url: "#",
       items: [
         {
@@ -168,7 +168,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <GalleryVerticalEnd className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Name of App</span>{" "}
+                  <span className="font-medium">Airbo</span>{" "}
                   <span className="text-muted-foreground">v1.0.0</span>
                 </div>
               </div>

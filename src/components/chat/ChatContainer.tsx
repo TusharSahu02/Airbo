@@ -6,6 +6,7 @@ import { BlockTypeDropdown } from "../ui/dropdowns/BlockTypeDropdown";
 import { ModelSelector } from "../ui/dropdowns/ModelSelector";
 import useChatStore from "@/stores/chatStore";
 import ChatLoader from "./ChatLoader";
+import Image from "next/image";
 
 export const ChatContainer: React.FC = () => {
   const { chatMessages, message, setMessage, handleSendMessage } =
@@ -49,7 +50,15 @@ export const ChatContainer: React.FC = () => {
       {!chatMessages.length ? (
         <div className="lg:max-w-5xl w-full h-full relative  mx-auto flex items-center justify-center flex-col">
           {/* LOGO  */}
-          <div className=" absolute border size-20 bg-gray-500/50 border-white rounded-full top-40 left-1/2 -translate-x-1/2 "></div>
+          <div className=" absolute border size-20  rounded-full top-40 left-1/2 -translate-x-1/2 ">
+            <Image
+              height={50}
+              width={50}
+              src="/logo.jpg"
+              alt=""
+              className=" w-full h-full object-cover rounded-full"
+            />
+          </div>
           <div className="border max-w-3xl lg:w-[65%] w-[90%] mx-auto bg-[#3e3e3e] rounded-2xl flex flex-col items-end justify-between p-3">
             <div className=" w-full">
               {/* Input Text field or Text area */}
@@ -77,7 +86,15 @@ export const ChatContainer: React.FC = () => {
         </div>
       ) : (
         <div className="lg:max-w-5xl w-full h-full relative gap-4 mx-auto flex flex-col py-2">
-          <div className="border size-20 bg-gray-500/50 border-white rounded-full mx-auto"></div>
+          <div className="border size-20 rounded-full mx-auto">
+            <Image
+              height={50}
+              width={50}
+              src="/logo.jpg"
+              alt=""
+              className=" w-full h-full object-cover rounded-full"
+            />
+          </div>
 
           <div
             ref={messagesContainerRef}
@@ -86,9 +103,7 @@ export const ChatContainer: React.FC = () => {
             {messages.map((msg, index) => (
               <ChatMessage key={index} message={msg} />
             ))}
-            {isLoading && (
-              <ChatLoader />
-            )}
+            {isLoading && <ChatLoader />}
             <div ref={messagesEndRef} />
           </div>
 

@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import LoginButton from "./LoginLogOutButton";
+// import LoginButton from "./LoginLogOutButton";
 
 const TopNavBar = () => {
   return (
@@ -21,7 +21,7 @@ const TopNavBar = () => {
           <p className=" text-sm">Upgrade Plan</p>
         </span>
       </Link>
-      <LoginButton />
+      {/* <LoginButton /> */}
 
       {/* Theme toggle */}
       <ModeToggle />

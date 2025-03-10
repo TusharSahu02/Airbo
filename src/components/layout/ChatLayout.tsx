@@ -16,7 +16,7 @@ const ChatLayout = ({ children }: { children: React.ReactNode }) => {
     >
       <TopNavBar />
       <AppSidebar />
-      <SidebarTrigger className="-ml-1 mt-7 absolute" />
+      <SidebarTrigger className="ml-2 mt-7 absolute cursor-pointer" />
       {children}
     </SidebarProvider>
   );

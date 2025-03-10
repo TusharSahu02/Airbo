@@ -1,15 +1,11 @@
-import React from 'react'
+import { TextShimmer } from "../ui/text-shimmer";
 
-const ChatLoader = () => {
-    return (
-        <div className="flex items-center w-max justify-start p-4 border rounded-b-2xl rounded-tr-2xl">
-            <div className="animate-pulse flex space-x-2">
-                <div className="h-2 w-2 bg-gray-400 rounded-full"></div>
-                <div className="h-2 w-2 bg-gray-400 rounded-full"></div>
-                <div className="h-2 w-2 bg-gray-400 rounded-full"></div>
-            </div>
-        </div>
-    )
+function ChatLoader() {
+  return (
+    <TextShimmer className="font-mono text-sm" duration={1}>
+      Generating code...
+    </TextShimmer>
+  );
 }
 
-export default ChatLoader
+export default ChatLoader;
